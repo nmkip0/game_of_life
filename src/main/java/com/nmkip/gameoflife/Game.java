@@ -10,6 +10,10 @@ public class Game {
         this.livingCells = livingCells;
     }
 
+    Game nextGeneration() {
+        return new Game();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
