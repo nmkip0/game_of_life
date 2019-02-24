@@ -10,7 +10,7 @@ public class Game {
         this.livingCells = livingCells;
     }
 
-    Game nextGeneration() {
+    Game tick() {
         return new Game();
     }
 

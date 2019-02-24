@@ -18,7 +18,7 @@ class GameShould {
     void kill_a_cell_that_was_without_neighbours_in_the_previous_generation() {
         Game game = new Game(Cell.at(new Coordinates(3,3)));
 
-        game = game.nextGeneration();
+        game = game.tick();
 
         assertThat(game, is(new Game()));
     }
