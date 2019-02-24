@@ -15,7 +15,7 @@ class GameShould {
     }
 
     @Test
-    void kill_a_cell_that_was_without_neighbours_in_the_previous_generation() {
+    void kill_a_cell_that_had_no_neighbours_in_the_previous_generation() {
         Game game = new Game(Cell.at(new Coordinates(3,3)));
 
         game = game.tick();
