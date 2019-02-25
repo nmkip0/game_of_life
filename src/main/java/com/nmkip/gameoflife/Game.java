@@ -1,17 +1,35 @@
 package com.nmkip.gameoflife;
 
-import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
+
+import static java.util.Arrays.asList;
 
 public class Game {
 
-    private Coordinate[] livingCells;
+    private Set<Coordinate> livingCells;
+    private Board board;
 
     public Game(Coordinate... livingCells) {
-        this.livingCells = livingCells;
+        this.livingCells = new HashSet<>(asList(livingCells));
+        this.board = new Board(livingCells);
+    }
+
+    private Game(Set<Coordinate> newBoard) {
+        this.livingCells = newBoard;
     }
 
     Game tick() {
-        return new Game();
+        Set<Coordinate> newBoard = new HashSet<>();
+        for (Coordinate aliveCell : livingCells) {
+            if(board.aliveNeighboursAround(aliveCell) > 3) {
+
+            } else if(board.aliveNeighboursAround(aliveCell) > 2){
+                newBoard.add(aliveCell);
+            }
+        }
+        return new Game(newBoard);
     }
 
     @Override
@@ -19,16 +37,16 @@ public class Game {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Game game = (Game) o;
-        return Arrays.equals(livingCells, game.livingCells);
+        return livingCells.equals(game.livingCells);
     }
 
     @Override
     public int hashCode() {
-        return Arrays.hashCode(livingCells);
+        return Objects.hash(livingCells);
     }
 
     @Override
     public String toString() {
-        return Arrays.toString(livingCells);
+        return livingCells.toString();
     }
 }

@@ -1,6 +1,8 @@
 package com.nmkip.gameoflife;
 
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 class Coordinate {
     private final int x;
@@ -28,5 +30,19 @@ class Coordinate {
     @Override
     public String toString() {
         return String.format("(%d,%d)", x, y);
+    }
+
+    Set<Coordinate> getNeighbours() {
+        Set<Coordinate> neighbours = new HashSet<>();
+        neighbours.add(new Coordinate(x - 1, y));
+        neighbours.add(new Coordinate(x + 1, y));
+        neighbours.add(new Coordinate(x + 1, y));
+        neighbours.add(new Coordinate(x, y - 1));
+        neighbours.add(new Coordinate(x, y + 1));
+        neighbours.add(new Coordinate(x - 1, y - 1));
+        neighbours.add(new Coordinate(x - 1, y + 1));
+        neighbours.add(new Coordinate(x + 1, y - 1));
+        neighbours.add(new Coordinate(x + 1, y + 1));
+        return neighbours;
     }
 }
