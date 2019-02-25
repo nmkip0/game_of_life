@@ -29,17 +29,17 @@ public class Game {
 
     }
 
+    private Set<Coordinate> keepAlive() {
+        return livingCells.stream()
+                          .filter(this::livingCellWithTwoOrThreeAliveNeighbours)
+                          .collect(Collectors.toSet());
+    }
+
     private Set<Coordinate> revive() {
         return livingCells.stream()
                           .map(this::deadNeighboursOf)
                           .flatMap(Collection::stream)
                           .filter(this::deadCellWithExactlyThreeLivingNeighbours)
-                          .collect(Collectors.toSet());
-    }
-
-    private Set<Coordinate> keepAlive() {
-        return livingCells.stream()
-                          .filter(this::livingCellWithTwoOrThreeAliveNeighbours)
                           .collect(Collectors.toSet());
     }
 

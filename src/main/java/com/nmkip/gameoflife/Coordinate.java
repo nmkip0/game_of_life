@@ -13,6 +13,20 @@ class Coordinate {
         this.y = y;
     }
 
+    Set<Coordinate> getNeighbours() {
+        Set<Coordinate> neighbours = new HashSet<>();
+        neighbours.add(new Coordinate(x - 1, y));
+        neighbours.add(new Coordinate(x + 1, y));
+        neighbours.add(new Coordinate(x + 1, y));
+        neighbours.add(new Coordinate(x, y - 1));
+        neighbours.add(new Coordinate(x, y + 1));
+        neighbours.add(new Coordinate(x - 1, y - 1));
+        neighbours.add(new Coordinate(x - 1, y + 1));
+        neighbours.add(new Coordinate(x + 1, y - 1));
+        neighbours.add(new Coordinate(x + 1, y + 1));
+        return neighbours;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -30,19 +44,5 @@ class Coordinate {
     @Override
     public String toString() {
         return String.format("(%d,%d)", x, y);
-    }
-
-    Set<Coordinate> getNeighbours() {
-        Set<Coordinate> neighbours = new HashSet<>();
-        neighbours.add(new Coordinate(x - 1, y));
-        neighbours.add(new Coordinate(x + 1, y));
-        neighbours.add(new Coordinate(x + 1, y));
-        neighbours.add(new Coordinate(x, y - 1));
-        neighbours.add(new Coordinate(x, y + 1));
-        neighbours.add(new Coordinate(x - 1, y - 1));
-        neighbours.add(new Coordinate(x - 1, y + 1));
-        neighbours.add(new Coordinate(x + 1, y - 1));
-        neighbours.add(new Coordinate(x + 1, y + 1));
-        return neighbours;
     }
 }
