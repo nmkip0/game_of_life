@@ -9,11 +9,9 @@ import static java.util.Arrays.asList;
 public class Game {
 
     private Set<Coordinate> livingCells;
-    private Board board;
 
     public Game(Coordinate... livingCells) {
         this.livingCells = new HashSet<>(asList(livingCells));
-        this.board = new Board(livingCells);
     }
 
     private Game(Set<Coordinate> newBoard) {
@@ -22,12 +20,20 @@ public class Game {
 
     Game tick() {
         Set<Coordinate> newBoard = new HashSet<>();
+
         for (Coordinate aliveCell : livingCells) {
-            if(board.aliveNeighboursAround(aliveCell) == 2 || board.aliveNeighboursAround(aliveCell) == 3){
+            if(aliveNeighboursAround(aliveCell) == 2 || aliveNeighboursAround(aliveCell) == 3){
                 newBoard.add(aliveCell);
             }
         }
+
         return new Game(newBoard);
+    }
+
+    private long aliveNeighboursAround(Coordinate cell) {
+        return cell.getNeighbours().stream()
+                   .filter(livingCells::contains)
+                   .count();
     }
 
     @Override
