@@ -23,9 +23,7 @@ public class Game {
     Game tick() {
         Set<Coordinate> newBoard = new HashSet<>();
         for (Coordinate aliveCell : livingCells) {
-            if(board.aliveNeighboursAround(aliveCell) > 3) {
-
-            } else if(board.aliveNeighboursAround(aliveCell) > 2){
+            if(board.aliveNeighboursAround(aliveCell) == 2 || board.aliveNeighboursAround(aliveCell) == 3){
                 newBoard.add(aliveCell);
             }
         }
