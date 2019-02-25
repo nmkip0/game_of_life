@@ -1,8 +1,10 @@
 package com.nmkip.gameoflife;
 
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import static java.util.Arrays.asList;
 
@@ -19,15 +21,40 @@ public class Game {
     }
 
     Game tick() {
-        Set<Coordinate> newBoard = new HashSet<>();
+        Set<Coordinate> keptAlive = keepAlive();
+        Set<Coordinate> revived = revive();
 
-        for (Coordinate aliveCell : livingCells) {
-            if(aliveNeighboursAround(aliveCell) == 2 || aliveNeighboursAround(aliveCell) == 3){
-                newBoard.add(aliveCell);
-            }
-        }
+        keptAlive.addAll(revived);
+        return new Game(keptAlive);
 
-        return new Game(newBoard);
+    }
+
+    private Set<Coordinate> revive() {
+        return livingCells.stream()
+                          .map(this::deadNeighboursOf)
+                          .flatMap(Collection::stream)
+                          .filter(this::deadCellWithExactlyThreeLivingNeighbours)
+                          .collect(Collectors.toSet());
+    }
+
+    private Set<Coordinate> keepAlive() {
+        return livingCells.stream()
+                          .filter(this::livingCellWithTwoOrThreeAliveNeighbours)
+                          .collect(Collectors.toSet());
+    }
+
+    private boolean deadCellWithExactlyThreeLivingNeighbours(Coordinate dead) {
+        return aliveNeighboursAround(dead) == 3;
+    }
+
+    private boolean livingCellWithTwoOrThreeAliveNeighbours(Coordinate cell) {
+        return aliveNeighboursAround(cell) == 2 || aliveNeighboursAround(cell) == 3;
+    }
+
+    private Set<Coordinate> deadNeighboursOf(Coordinate aliveCell) {
+        return aliveCell.getNeighbours().stream()
+                        .filter(n -> !livingCells.contains(n))
+                        .collect(Collectors.toSet());
     }
 
     private long aliveNeighboursAround(Coordinate cell) {

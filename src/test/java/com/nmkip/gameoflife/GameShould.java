@@ -42,9 +42,25 @@ class GameShould {
         game = game.tick();
 
         assertThat(game, is(new Game(
-                                                                        new Coordinate(0, 1),
-                new Coordinate(1, -1),                          new Coordinate(1, 1)
+                new Coordinate(0, -1),                          new Coordinate(0, 1),
+                new Coordinate(1, -1),                          new Coordinate(1, 1),
+                                            new Coordinate(2, 0)
         )));
+    }
+
+    @Test
+    void revive_cells_with_exactly_three_neighbours_after_tick() {
+        Game game = new Game(
+                new Coordinate(1, 1),
+                new Coordinate(2, 1),
+                new Coordinate(3, 1)
+        );
+
+        game = game.tick();
+
+        assertThat(game, is(
+                new Game(new Coordinate(2,0), new Coordinate(2, 1), new Coordinate(2, 2))
+        ));
     }
 
     private Coordinate[] aBlock() {
