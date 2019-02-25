@@ -4,9 +4,9 @@ import java.util.Arrays;
 
 public class Game {
 
-    private Cell[] livingCells;
+    private Coordinate[] livingCells;
 
-    public Game(Cell... livingCells) {
+    public Game(Coordinate... livingCells) {
         this.livingCells = livingCells;
     }
 

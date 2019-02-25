@@ -2,11 +2,11 @@ package com.nmkip.gameoflife;
 
 import java.util.Objects;
 
-class Coordinates {
+class Coordinate {
     private final int x;
     private final int y;
 
-    Coordinates(int x, int y) {
+    Coordinate(int x, int y) {
         this.x = x;
         this.y = y;
     }
@@ -15,7 +15,7 @@ class Coordinates {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Coordinates that = (Coordinates) o;
+        Coordinate that = (Coordinate) o;
         return x == that.x &&
                 y == that.y;
     }
