@@ -10,7 +10,7 @@ import static java.util.Arrays.asList;
 
 public class Game {
 
-    private Set<Coordinate> livingCells;
+    private final Set<Coordinate> livingCells;
 
     public Game(Coordinate... livingCells) {
         this.livingCells = new HashSet<>(asList(livingCells));
