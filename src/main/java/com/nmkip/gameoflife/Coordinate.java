@@ -13,7 +13,7 @@ class Coordinate {
         this.y = y;
     }
 
-    Set<Coordinate> getNeighbours() {
+    Set<Coordinate> neighbours() {
         Set<Coordinate> neighbours = new HashSet<>();
         neighbours.add(new Coordinate(x - 1, y));
         neighbours.add(new Coordinate(x + 1, y));

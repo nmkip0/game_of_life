@@ -52,13 +52,13 @@ public class Game {
     }
 
     private Set<Coordinate> deadNeighboursOf(Coordinate aliveCell) {
-        return aliveCell.getNeighbours().stream()
+        return aliveCell.neighbours().stream()
                         .filter(n -> !livingCells.contains(n))
                         .collect(Collectors.toSet());
     }
 
     private long aliveNeighboursAround(Coordinate cell) {
-        return cell.getNeighbours().stream()
+        return cell.neighbours().stream()
                    .filter(livingCells::contains)
                    .count();
     }
